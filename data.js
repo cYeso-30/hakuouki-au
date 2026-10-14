@@ -1,0 +1,272 @@
+/* ============================================================
+ * 《薄櫻鬼 AU·薄雪殘燈》遊戲核心數據模塊
+ * 定義角色、初始關係、章節劇情等結構化數據
+ * ============================================================ */
+
+// ---------- 角色資料庫 ----------
+const CHARACTER_DB = {
+  kondo: {
+    id: "kondo",
+    name: "近藤勇",
+    nameKana: "こんどう いさみ",
+    title: "試衛館館長",
+    age: "（不詳）",
+    appearance: "身形魁梧，目光沉穩，眉宇間帶著習武之人的威嚴與豪氣。",
+    personality: "豪爽、重情義、責任感強，對門下弟子既嚴厲又關懷。",
+    habits: "每日清晨必練劍，飯量驚人。",
+    currentLocation: "試衛館·道場",
+    currentAction: "指導弟子練劍",
+    knownState: "精神飽滿，正為道場的未來操心。",
+    relation: "初識",
+    history: "初次見面時正在道場指導年輕弟子。",
+    confirmed: "劍術高超，深受弟子敬仰；對試衛館有深厚感情。",
+    goals: "維持試衛館的運作，培養優秀的劍客。",
+    language: "日本語為主，幾乎不懂英語。",
+    unlocked: true,
+  },
+  hijikata: {
+    id: "hijikata",
+    name: "土方歳三",
+    nameKana: "ひじかた としぞう",
+    title: "試衛館副長",
+    age: "（不詳）",
+    appearance: "眉目銳利，身姿挺拔，舉手投足間透著一股不容置疑的威嚴。",
+    personality: "嚴厲敏銳、原則明確，關心他人時往往不直說出口。",
+    habits: "隨身帶著煙管，思考時會沉默許久。",
+    currentLocation: "試衛館·玄關",
+    currentAction: "核對道場帳目",
+    knownState: "神情冷峻，正專注於手邊事務。",
+    relation: "初識",
+    history: "在道場門口與其打過照面。",
+    confirmed: "負責道場的內務管理；劍術與近藤不相上下。",
+    goals: "讓試衛館成為天下聞名的道場。",
+    language: "日本語為主，幾乎不懂英語。",
+    unlocked: true,
+  },
+  okita: {
+    id: "okita",
+    name: "沖田總司",
+    nameKana: "おきた そうじ",
+    title: "試衛館弟子",
+    age: "（不詳）",
+    appearance: "年輕俊秀，笑起來帶點孩子氣，但眼神銳利如鷹。",
+    personality: "敏銳、善於觀察、喜歡調侃，能察覺言外之意。",
+    habits: "練劍時格外認真，平時則愛開玩笑。",
+    currentLocation: "試衛館·道場",
+    currentAction: "擦拭竹刀",
+    knownState: "精神奕奕，時不時偷瞄旁人。",
+    relation: "初識",
+    history: "在道場中與其有過簡短交談。",
+    confirmed: "劍術天賦極高；性格開朗，善於察言觀色。",
+    goals: "成為頂尖劍客，守護試衛館。",
+    language: "日本語為主，幾乎不懂英語。",
+    unlocked: true,
+  },
+  saito: {
+    id: "saito",
+    name: "斎藤一",
+    nameKana: "さいとう はじめ",
+    title: "試衛館弟子",
+    age: "（不詳）",
+    appearance: "沉默寡言，目光冷靜，站姿如一柄出鞘的刀。",
+    personality: "沉靜、認真、克制，習慣先觀察再行動。",
+    habits: "獨自練劍的時間最長。",
+    currentLocation: "試衛館·後院",
+    currentAction: "獨自揮劍",
+    knownState: "專注於劍術，不與旁人多言。",
+    relation: "陌生",
+    history: "尚未有深入交流。",
+    confirmed: "劍術高超，行事低調。",
+    goals: "不詳。",
+    language: "日本語為主。",
+    unlocked: false,
+  },
+  harada: {
+    id: "harada",
+    name: "原田左之助",
+    nameKana: "はらだ さのすけ",
+    title: "試衛館弟子",
+    age: "（不詳）",
+    appearance: "體格健壯，聲音洪亮，一臉坦蕩蕩的豪氣。",
+    personality: "直率坦蕩、行動果斷，不喜拐彎抹角。",
+    habits: "練完劍總愛找人比試。",
+    currentLocation: "試衛館·道場",
+    currentAction: "與同伴切磋",
+    knownState: "熱血沸騰，興致高昂。",
+    relation: "初識",
+    history: "曾在道場中與其打過招呼。",
+    confirmed: "性格直爽，劍術以力量見長。",
+    goals: "不詳。",
+    language: "日本語為主。",
+    unlocked: true,
+  },
+  nagakura: {
+    id: "nagakura",
+    name: "永倉新八",
+    nameKana: "ながくら しんぱち",
+    title: "試衛館弟子",
+    age: "（不詳）",
+    appearance: "笑臉常開，眼神靈動，充滿活力。",
+    personality: "爽朗熱鬧、有活力，是道場的氣氛擔當。",
+    habits: "愛講笑話，飯量也不小。",
+    currentLocation: "試衛館·廚房",
+    currentAction: "幫忙準備午膳",
+    knownState: "一邊哼著歌一邊忙碌。",
+    relation: "初識",
+    history: "曾在用餐時與其聊過幾句。",
+    confirmed: "性格開朗，擅長活絡氣氛。",
+    goals: "不詳。",
+    language: "日本語為主。",
+    unlocked: true,
+  },
+  todo: {
+    id: "todo",
+    name: "藤堂平助",
+    nameKana: "とうどう へいすけ",
+    title: "試衛館弟子",
+    age: "（不詳）",
+    appearance: "年紀尚輕，眼神熱切，充滿正義感。",
+    personality: "熱情、衝動、重視同伴，遇事容易衝在前頭。",
+    habits: "練劍時格外拚命。",
+    currentLocation: "試衛館·道場",
+    currentAction: "專注練習",
+    knownState: "滿頭大汗，仍不肯停下。",
+    relation: "初識",
+    history: "曾在道場中與其有過短暫交流。",
+    confirmed: "年輕有衝勁，重視同伴。",
+    goals: "不詳。",
+    language: "日本語為主。",
+    unlocked: true,
+  },
+  yamanami: {
+    id: "yamanami",
+    name: "山南敬助",
+    nameKana: "やまなみ けいすけ",
+    title: "試衛館副長",
+    age: "（不詳）",
+    appearance: "氣質沉穩，目光深邃，舉止間帶著書卷氣。",
+    personality: "觀察細緻、言行克制、心思深沉，不輕易把想法說出口。",
+    habits: "喜愛讀書，常在夜深時獨坐思考。",
+    currentLocation: "試衛館·書院",
+    currentAction: "翻閱書籍",
+    knownState: "神情平和，若有所思。",
+    relation: "初識",
+    history: "曾在書院中與其打過照面。",
+    confirmed: "學識淵博，劍術亦不俗；心思縝密。",
+    goals: "不詳。",
+    language: "日本語為主。",
+    unlocked: true,
+  },
+};
+
+// ---------- 初始遊戲狀態 ----------
+function getInitialState() {
+  return {
+    version: "薄雪残灯 v1.0",
+    chapter: "第一章",
+    chapterTitle: "雪日初逢",
+    sceneTitle: "踏雪入門",
+    time: "文久二年冬·午前",
+    location: "試衛館·門前",
+    presentCharacters: ["kondo", "okita", "harada"],
+    player: {
+      name: "",
+      identityConfirmed: false,
+      confirmedInfo: [],
+    },
+    items: [],
+    clues: [],
+    mysteries: [],
+    foreshadows: [],
+    keyDecisions: [],
+    timeline: [
+      { time: "文久二年冬", event: "踏雪來到試衛館門前，故事由此開始。" },
+    ],
+  };
+}
+
+// ---------- 初始劇情場景 ----------
+function getInitialScene() {
+  return {
+    chapter: "第一章",
+    chapterTitle: "雪日初逢",
+    sceneTitle: "踏雪入門",
+    time: "文久二年冬·午前",
+    location: "試衛館·門前",
+    present: ["kondo", "okita", "harada"],
+    // 旁白（narrative）
+    narrative: [
+      "大雪紛飛，覆蓋了江戶的街巷。我踏著積雪，來到了一間樸素的道場門前——試衛館。",
+      "門簾被風掀起一角，裡面傳來竹刀交擊的清脆聲響與年輕人的呼喝聲。",
+      "一位身形魁梧的男人正站在門口，目光沉穩地望著我。他身後，幾個年輕弟子或擦拭竹刀，或相互比劃，氣氛熱鬧而不失秩序。",
+      "其中一個俊秀少年停下手中動作，笑嘻嘻地朝我望了過來。",
+    ],
+    // 對白：每條獨立氣泡 { speaker, lines:[{jp, kana, romaji, zh}] }
+    dialogues: [
+      {
+        speaker: "近藤勇",
+        characterId: "kondo",
+        lines: [
+          {
+            jp: "よく来たな。試衛館へようこそ。",
+            kana: "よく きたな。しえいかんへ ようこそ。",
+            romaji: "Yoku kita na. Shieikan e yōkoso.",
+            zh: "你來得正好。歡迎來到試衛館。",
+          },
+        ],
+      },
+      {
+        speaker: "沖田總司",
+        characterId: "okita",
+        lines: [
+          {
+            jp: "おや、新しい顔だね。雪の中をよく来られたな。",
+            kana: "おや、あたらしい かおだね。ゆき の なかを よく こられたな。",
+            romaji: "Oya, atarashii kao da ne. Yuki no naka o yoku korareta na.",
+            zh: "哎呀，新面孔呢。這麼大的雪還能趕來，真不簡單。",
+          },
+        ],
+      },
+      {
+        speaker: "原田左之助",
+        characterId: "harada",
+        lines: [
+          {
+            jp: "おいおい、また見物人か？　ま、入って見ていけ！",
+            kana: "おいおい、また けんぶつにんか？　ま、はいって みていけ！",
+            romaji: "Oi oi, mata kenbutsunin ka? Ma, haitte mite ike!",
+            zh: "哎呀，又來看熱鬧的？算了，進來瞧瞧吧！",
+          },
+        ],
+      },
+    ],
+    statusChanges: [],
+    choices: [
+      {
+        id: "c1",
+        text: "拱手行禮，說明自己慕名前來，想在此修行。",
+        type: "action",
+      },
+      {
+        id: "c2",
+        text: "坦承自己只是路過，被道場的聲響吸引而駐足。",
+        type: "action",
+      },
+      {
+        id: "c3",
+        text: "反問他們：「這裡便是試衛館嗎？聽說此地聚集了不少劍術高手。」",
+        type: "action",
+      },
+      {
+        id: "c4",
+        text: "先不急著表明來意，只說：「雪太大了，可否借一步暫避？」",
+        type: "action",
+      },
+    ],
+  };
+}
+
+// ---------- 匯出 ----------
+if (typeof module !== "undefined") {
+  module.exports = { CHARACTER_DB, getInitialState, getInitialScene };
+}
